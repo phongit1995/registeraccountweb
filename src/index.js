@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 let path = require('path');
 let session = require('express-session');
+let flash = require('connect-flash');
 const mongoose = require('mongoose');
 // Router
 let app = express();
@@ -28,6 +29,7 @@ app.use(session({
       maxAge:1000*60*60*12
     }
 }))
+app.use(flash());
 app.get('/',controller.indexpage);
 app.post('/',controller.createaccount);
 app.listen(process.env.PORT,()=>{

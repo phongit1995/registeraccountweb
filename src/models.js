@@ -12,6 +12,13 @@ let user = new Schema ({
 })
 user.static({
     addNewUser (item){
+        let {username,password,idweb} = item ;
+        if(username==null || idweb==null){
+            return false;
+        }
+        if(password==null){
+            return false
+        }
         return this.create(item) 
     },
     findUserByUserName (username){
