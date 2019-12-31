@@ -36,15 +36,17 @@ let createaccount = async (req,res)=>{
     let resutRegister = await registeraccount(session,captcha);
     if(resutRegister){
         req.flash('message','success');
+        if(req.session.number){
+            req.session.number++;
+        }
+        else {
+            req.session.number=1;
+        }
     }else{
         req.flash('message','error');
     }
-    if(req.session.number){
-        req.session.number++;
-    }
-    else {
-        req.session.number=1;
-    }
+
+    
     console.log(resutRegister);
     res.redirect('/');
 }
