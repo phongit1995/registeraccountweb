@@ -28,7 +28,8 @@ app.use(session({
       maxAge:1000*60*60*12
     }
 }))
-app.get('/',controller.indexpage)
+app.get('/',controller.indexpage);
+app.post('/',controller.createaccount);
 app.listen(process.env.PORT,()=>{
     console.log('Web listen on port :' + process.env.PORT);
 })

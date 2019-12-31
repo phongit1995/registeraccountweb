@@ -3,7 +3,12 @@ let fs = require('fs');
 let path= require('path');
 let indexpage = async( req,res)=>{
     if(req.session.image){
-        fs.unlinkSync(path.join(__dirname,'./../public/images/')+req.session.image)
+        try {
+            fs.unlinkSync(path.join(__dirname,'./../public/images/')+req.session.image)
+        } catch (error) {
+            
+        }
+       
     }
     let {image,cookie} = await getInfo();
     console.log(image ,cookie); 
@@ -12,8 +17,18 @@ let indexpage = async( req,res)=>{
 
     res.render('index',{image:image});
 }
+let createaccount = async (req,res)=>{
+    if(req.session.image){
+        try {
+            fs.unlinkSync(path.join(__dirname,'./../public/images/')+req.session.image);
+        } catch (error) {
+            
+        }
+    }
+    console.log(req.body);
+}
 module.exports = {
-    indexpage
+    indexpage,createaccount
 }
 async function getInfo (){
     let option = {
